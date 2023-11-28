@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="podcast">
+            <h3 class="podcast__episode_title">Debugging Tools + Tips</h3>
+            <h5 class="podcast__title">
+                Syntax.fm
+                <i>Episode 152</i>
+            </h5>
+
+            <div class="podcast__meta">
+                <audio controls width="100%">
+                    <source
+                        src="Diewtodsi Hypersonic.mp3">
+                    Your browser does not support the audio tag.
+                </audio>
+                <a href="#" class="artwork">
+                    <img src="https://images.unsplash.com/photo-1490821872962-f2e55097079b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&h=300"
+                        alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const options = {
+            defaultSpeed: '1.00',
+            speeds: ['1.25', '1.50', '2.00', '0.75'],
+            loop: true,
+            skipBackInterval: 15,
+            jumpForwardInterval: 15,
+            features: [
+                "playpause",
+                "progress",
+                "current",
+                "duration",
+                "skipback",
+                "changespeed",
+                "volume",
+                "jumpforward",
+            ]
+        }
+
+        new MediaElementPlayer(
+            document.querySelector("audio"),
+            options
+        );
+
+        // Separate the audio controls so I can style them better.
+        (() => {
+            const elementTop = document.createElement('div');
+            const elementBottom = document.createElement('div');
+            elementTop.classList.add('mejs-prepended-buttons');
+            elementBottom.classList.add('mejs-appended-buttons');
+
+            const controls = document.querySelector('.mejs__controls');
+            controls.prepend(elementTop);
+            controls.append(elementBottom);
+
+            const controlsChildren = Array.from(controls.childNodes).filter(v => v.className.startsWith("mejs_"));
+
+            controlsChildren.slice(0, 3).forEach(elem => {
+                elementTop.append(elem)
+            });
+
+            controlsChildren.slice(3, controlsChildren.length).forEach(elem => {
+                elementBottom.append(elem)
+            })
+        })()
+    </script>
+</body>
+
+</html>
